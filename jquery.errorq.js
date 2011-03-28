@@ -1,5 +1,11 @@
 /*
     Robust error/retry queue for Ajax requests.
+
+    Documentation, pull requests, and bug reporting:
+    https://github.com/kumar303/jquery-errorq
+
+    (c) Kumar McMillan
+    Apache License -- have fun!
 */
 
 (function( $ ){
