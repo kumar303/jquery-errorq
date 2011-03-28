@@ -14,6 +14,7 @@ visual information for what's happening as Ajax requests are queued up and
 retried in the background. No CSS is required to use the plugin.
 
 .. contents::
+  :local:
 
 Usage
 =====
@@ -22,7 +23,7 @@ Get a singleton ErrorQ instance for your DOM node like this::
 
   var errorq = $('#error-viewer').errorq();
 
-Send a request::
+Send a request which is tried immediately::
 
   errorq.ajax({
       url: '/myserver',
@@ -38,7 +39,7 @@ Send a request::
       }
   });
 
-If the request fails then it gets retried after **retryInterval**. You can
+If the request fails then it gets retried after a couple seconds. You can
 keep queuing up requests and the failing ones will get retried in the order
 they were received.
 
@@ -84,7 +85,7 @@ Properties:
   use a prefix.
 
 **work.ajaxSettings**
-  Object containing the settings you passed to ``errorq.ajax({})``
+  The same settings you passed to ``errorq.ajax(settings)``
 
 **work.success**
   true if this request was successful.
@@ -102,8 +103,7 @@ Properties:
 error
 ~~~~~
 
-This event is fired for each error per Ajax request. When a request gets
-retried and fails, the error event is fired again.
+fired for each request failure, even after a retry.
 
 ::
 
@@ -114,7 +114,7 @@ retried and fails, the error event is fired again.
 success
 ~~~~~~~
 
-This event is fired when an Ajax request finishes successfully.
+fired when a request finishes successfully.
 
 ::
 
@@ -125,7 +125,7 @@ This event is fired when an Ajax request finishes successfully.
 abort
 ~~~~~
 
-This event is fired when an Ajax request is aborted either via
+fired when a request is aborted either via
 ``work.abort()`` or by maxing out the number of retries.
 
 ::
